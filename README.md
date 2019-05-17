@@ -6,10 +6,10 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 ---
 
 ## 必要なもの
-SONY PaSoRiカードリーダー（RC-S380のみ対応）
-Google Chrome（WebUSB対応するブラウザのみ）
-Felicaカード
-Scratch 3.0
+- SONY PaSoRiカードリーダー（RC-S380のみ対応）
+- Google Chrome（WebUSB対応するブラウザのみ）
+- Felicaカード
+- Scratch 3.0
 
 ---
 
