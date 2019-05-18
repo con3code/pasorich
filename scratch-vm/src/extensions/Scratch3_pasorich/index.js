@@ -4,9 +4,10 @@ const Cast = require('../../util/cast');
 const log = require('../../util/log');
 
 //
-var idnum;
 var pasoriDevice;
+var idnum;
 var gr_arr;
+var readingFlag = false;
 
 
  /**
@@ -35,134 +36,158 @@ function sleep(msec) {
 
 function send(s_device, data) {
         let uint8a = new Uint8Array(data);
-        s_device.transferOut(2, uint8a);
+//        console.log("snd -> ");
+        s_device.transferOut(2, uint8a)
+        .then(true);
 }
 
 
 function receive(r_device, len, cpy) {
+//    console.log("rcv <- " + len);
     r_device.transferIn(1, len)
     .then(result => {
-//        console.log(result.data);
-        sleep(100)
-        .then(() => {
             let arr = [];
             for (let i = result.data.byteOffset; i < result.data.byteLength; i++) {
                 arr.push(result.data.getUint8(i));
             }
             if(cpy){
                 gr_arr = JSON.parse(JSON.stringify(arr));
-                console.log("gr_arr:" + gr_arr);
+//                console.log("gr_arr:" + gr_arr);
             }
-//            console.log(arr);
             return arr;
-        });
     });
 }
 
 
 
 function session(ss_device) {
-    console.log("=== S:session ===");
-    console.log("ss_device:");
-    console.log(ss_device);
+//    console.log("=== S:session ===");
+//    console.log("ss_device:");
+//    console.log(ss_device);
 
 
-    sleep(200).then(() => {
-        setTimeout(
-        send(ss_device, [0x00, 0x00, 0xff, 0x00, 0xff, 0x00], false),500);
+    sleep(8).then(() => {
+        send(ss_device, [0x00, 0x00, 0xff, 0x00, 0xff, 0x00], false);
+        return sleep(8);
     })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false),500);
-    })
-    .then(() => {
-        setTimeout(
-        receive(ss_device, 6, false),500);
-    })
-    .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
-    })
-    .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false),500);
-    })
-    .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
-    .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false);
+            return sleep(8);
         })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false),500);
+        receive(ss_device, 6, false);
+        return sleep(8);
     })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
-    })
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false),500);
-    })
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
-    })
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false),500);
-    })
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
-    })
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false),500);
-    })
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 13, false),500);
-    })
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false),500);
-    })
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
     .then(() => {
-        setTimeout(
-            receive(ss_device, 6, false),500);
-    })
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
+    .then(() => {
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false);
+            return sleep(8);
+        })
+    .then(() => {
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
+    .then(() => {
+            receive(ss_device, 13, false);
+            return sleep(8);
+        })
+    .then(() => {
+            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false);
+            return sleep(8);
+        })
+    .then(() => {
+            receive(ss_device, 6, false);
+            return sleep(8);
+        })
     .then(() => {
         receive(ss_device, 37, true);
-//        setTimeout(receive(ss_device, 37, false),500);
+        return sleep(8);
+    })
+    .then(() => {
+        setTimeout(() => {
+            readingFlag = false;
+        },8);
+        if (gr_arr.length > 24){
+            let idm = gr_arr.slice(17, 24);
+            if (idm.length > 0) {
+                let idmStr = '';
+                for (let i = 0; i < idm.length; i++) {
+                    if (idm[i] < 16) {
+                        idmStr += '0';
+                    }
+                    idmStr += idm[i].toString(16);
+                }
+//                console.log(idmStr);
+                idnum = JSON.parse(JSON.stringify(idmStr));
+            }
+        
+        }else {
+            idnum = '';
+        }
+        return;
     })
     .catch((err) => {console.log(err);})
     ;
+
+
+//    console.log("=== E:session ===");
 
 }
 
 
 /**
- * Class for the new blocks in Scratch 3.0
+ * Class for the PaSoRich - PaSoRi with Scratch 3.0
  * @param {Runtime} runtime - the runtime instantiating this block package.
  * @constructor
  */
@@ -174,7 +199,7 @@ class Scratch3Pasorich {
          */
         this.runtime = runtime;
 
-        console.log("initializing...");
+//        console.log("initializing...");
         if (pasoriDevice != null) {
             pasoriDevice.close();
             pasoriDevice = null;
@@ -190,9 +215,7 @@ class Scratch3Pasorich {
         .then(() => 
             pasoriDevice.claimInterface(0)
         );
-        console.log("pasoriDevice:");
-        console.log(pasoriDevice);
-        console.log("init_done");
+//        console.log("init_done");
     }
 
 
@@ -218,6 +241,11 @@ class Scratch3Pasorich {
                     blockType: BlockType.REPORTER
                 },
                 {
+                    opcode: 'getReadingFlag',
+                    text: 'reading',
+                    blockType: BlockType.BOOLEAN
+                },
+                {
                     opcode: 'openPasori',
                     text: 'open PaSoRi',
                     blockType: BlockType.COMMAND,
@@ -237,10 +265,12 @@ class Scratch3Pasorich {
 
 
 
-    readPasori () {
-        console.log('=== S:readPaSoRi ===');
 
-//        console.log(pasoriDevice.opened);
+    readPasori () {
+//        console.log('=== S:readPaSoRi ===');
+
+        if(readingFlag){return;}
+        readingFlag = true;
 
         if(pasoriDevice.opened){
             pasoriDevice.close();
@@ -260,28 +290,9 @@ class Scratch3Pasorich {
             });
             session(pasoriDevice);
         })
-        .then(() => {
-            if (gr_arr.length > 24){
-                let idm = gr_arr.slice(17, 24);
-                if (idm.length > 0) {
-                    let idmStr = '';
-                    for (let i = 0; i < idm.length; i++) {
-                        if (idm[i] < 16) {
-                            idmStr += '0';
-                        }
-                        idmStr += idm[i].toString(16);
-                    }
-                    console.log(idmStr);
-                    idnum = JSON.parse(JSON.stringify(idmStr));
-                }
-            
-            }else {
-                idnum = '';
-            }
-        })
         .catch(error => { console.log(error); });
 
-        console.log('=== S:readPaSoRi ===');
+//        console.log('=== E:readPaSoRi ===');
     }
 
 
@@ -290,9 +301,16 @@ class Scratch3Pasorich {
         return idnum;
     }
 
+    getReadingFlag () {
+        return readingFlag;
+    }
+
 
     openPasori () {
-        console.log('=== S:openPaSoRi ===');
+//        console.log('=== S:openPaSoRi ===');
+        
+        if(readingFlag){return;}
+
         if (pasoriDevice != null) {
             pasoriDevice.close();
             pasoriDevice = null;
@@ -313,12 +331,12 @@ class Scratch3Pasorich {
         })
         .catch(error => { console.log(error); });
 
-        console.log('=== E:openPaSoRi ===');
+//        console.log('=== E:openPaSoRi ===');
     }
 
 
-
     closePasori () {
+        if(readingFlag){return;}
         return pasoriDevice.close();
     }
 
