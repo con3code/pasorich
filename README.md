@@ -10,6 +10,8 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 - Google Chrome または Chromiumブラウザ
 - Scratch 3.0
 
+デモ環境をGitHub Pages上で構築　→　[https://con3office.github.io/scratch-gui/](https://con3office.github.io/scratch-gui/)
+
 ---
 
 ## 動作環境
@@ -25,8 +27,6 @@ WebUSBによる動作検証段階です。拡張機能追加後のPaSoRiリー�
 
 ## 開発環境
 macOS上でローカルScratch3.0環境を構築して開発。
-
-デモ環境をGitHub Pages上で構築　→　[https://con3office.github.io/scratch-gui/](https://con3office.github.io/scratch-gui/)
 
 ## 参考情報
 
