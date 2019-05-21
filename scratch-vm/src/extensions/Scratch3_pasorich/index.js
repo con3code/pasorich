@@ -3,7 +3,7 @@ const BlockType = require('../../extension-support/block-type');
 const Cast = require('../../util/cast');
 const log = require('../../util/log');
 
-//
+//PaSoRich Values
 var pasoriDevice;
 var idnum;
 var gr_arr;
@@ -29,7 +29,7 @@ const menuIconURI = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
 function sleep(msec) {
     return new Promise(resolve => 
         setTimeout(() => {
-            resolve(true);
+            resolve();
         }, msec)
     );
 }
@@ -38,7 +38,8 @@ function send(s_device, data) {
         let uint8a = new Uint8Array(data);
 //        console.log("snd -> ");
         s_device.transferOut(2, uint8a)
-        .then(true);
+        .then()
+        .catch();
 }
 
 
@@ -61,127 +62,140 @@ function receive(r_device, len, cpy) {
 
 
 function session(ss_device) {
-//    console.log("=== S:session ===");
+    console.log("=== S:session ===");
 //    console.log("ss_device:");
 //    console.log(ss_device);
 
 
-    sleep(8).then(() => {
+    sleep(38).then(() => {
         send(ss_device, [0x00, 0x00, 0xff, 0x00, 0xff, 0x00], false);
-        return sleep(8);
+        return sleep(16);
     })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
         receive(ss_device, 6, false);
-        return sleep(8);
+        return sleep(16);
     })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(8);
+            return sleep(16);
         })
     .then(() => {
         receive(ss_device, 37, true);
-        return sleep(8);
+        return sleep(16);
     })
     .then(() => {
-        setTimeout(() => {
-            readingFlag = false;
-        },8);
-        if (gr_arr.length > 24){
-            let idm = gr_arr.slice(17, 24);
-            if (idm.length > 0) {
-                let idmStr = '';
-                for (let i = 0; i < idm.length; i++) {
-                    if (idm[i] < 16) {
-                        idmStr += '0';
-                    }
-                    idmStr += idm[i].toString(16);
-                }
-//                console.log(idmStr);
-                idnum = JSON.parse(JSON.stringify(idmStr));
-            }
-        
-        }else {
-            idnum = '';
-        }
-        return;
+	    
+//	    console.log(gr_arr);
+	    
+	    if (gr_arr != undefined){
+	        if (gr_arr.length > 24){
+	            
+	            let idm = gr_arr.slice(17, 24);
+				if (idm.length > 0) {
+            	    let idmStr = '';
+					for (let i = 0; i < idm.length; i++) {
+                	    if (idm[i] < 16) {
+                	        idmStr += '0';
+						}
+						idmStr += idm[i].toString(16);
+					}
+					console.log("Idm: " + idmStr);
+					idnum = JSON.parse(JSON.stringify(idmStr));
+            	}
+            	
+        	}else {
+				idnum = '';
+        	}
+        	
+	    } else {
+				idnum = '';		    
+	    }
+
     })
-    .catch((err) => {console.log(err);})
+    .catch((err) => {
+	    console.log(err);
+	})
+	.finally(() => {
+		setTimeout(() => {
+            readingFlag = false;
+        },8);		
+	})
     ;
 
 
-//    console.log("=== E:session ===");
+    console.log("=== E:session ===");
 
 }
 
@@ -199,11 +213,15 @@ class Scratch3Pasorich {
          */
         this.runtime = runtime;
 
-//        console.log("initializing...");
+        console.log("initializing...");
         if (pasoriDevice != null) {
             pasoriDevice.close();
             pasoriDevice = null;
         }
+
+		console.log(navigator);
+//		console.log(navigator.usb);
+ 
         navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] })
         .then(selectedDevice => {
             pasoriDevice = selectedDevice;
@@ -214,8 +232,13 @@ class Scratch3Pasorich {
         )
         .then(() => 
             pasoriDevice.claimInterface(0)
-        );
-//        console.log("init_done");
+        )
+		.then(() =>
+			session(pasoriDevice)
+		)
+        ;
+        
+        console.log("init_done");
     }
 
 
@@ -246,17 +269,26 @@ class Scratch3Pasorich {
                     blockType: BlockType.BOOLEAN
                 },
                 {
+                    opcode: 'getWaitingFlag',
+                    text: 'waiting',
+                    blockType: BlockType.BOOLEAN
+                }
+/**
+                ,
+                {
                     opcode: 'openPasori',
                     text: 'open PaSoRi',
                     blockType: BlockType.COMMAND,
                     text: 'open PaSoRi'
-                },
+                }
+                ,
                 {
                     opcode: 'closePasori',
                     text: 'close PaSoRi',
                     blockType: BlockType.COMMAND,
                     text: 'close PaSoRi'
                 }
+*/
             ],
             menus: {
             }
@@ -267,17 +299,19 @@ class Scratch3Pasorich {
 
 
     readPasori () {
-//        console.log('=== S:readPaSoRi ===');
+        console.log('=== S:readPaSoRi ===');
 
         if(readingFlag){return;}
         readingFlag = true;
+
+		idnum = '';
 
         if(pasoriDevice.opened){
             pasoriDevice.close();
         }
 
         navigator.usb.getDevices().then(devices => {
-            console.log(devices);
+//            console.log(devices);
             devices.map(selectedDevice => {
                 pasoriDevice = selectedDevice;
                 pasoriDevice.open()
@@ -286,28 +320,38 @@ class Scratch3Pasorich {
                 )
                 .then(() => 
                     pasoriDevice.claimInterface(0)
-                );
+                )
+                .then(() =>
+					session(pasoriDevice)
+                )
+                ;
             });
-            session(pasoriDevice);
+//            session(pasoriDevice);
         })
         .catch(error => { console.log(error); });
 
-//        console.log('=== E:readPaSoRi ===');
+        console.log('=== E:readPaSoRi ===');
     }
 
 
 
     getIdm () {
+		console.log('=== S:getIdm ===');
         return idnum;
     }
+
 
     getReadingFlag () {
         return readingFlag;
     }
 
-
+	getWaitingFlag () {
+        return !readingFlag;
+    }
+    
+    
     openPasori () {
-//        console.log('=== S:openPaSoRi ===');
+        console.log('=== S:openPaSoRi ===');
         
         if(readingFlag){return;}
 
@@ -316,6 +360,21 @@ class Scratch3Pasorich {
             pasoriDevice = null;
         }
 
+
+        navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] })
+        .then(selectedDevice => {
+            pasoriDevice = selectedDevice;
+            return pasoriDevice.open();
+        })
+        .then(() => 
+            pasoriDevice.selectConfiguration(1)
+        )
+        .then(() => 
+            pasoriDevice.claimInterface(0)
+        )
+        .catch(error => { console.log(error); });
+
+/**
         navigator.usb.getDevices().then(devices => {
             console.log(devices);
             devices.map(selectedDevice => {
@@ -330,8 +389,9 @@ class Scratch3Pasorich {
             });
         })
         .catch(error => { console.log(error); });
+*/
 
-//        console.log('=== E:openPaSoRi ===');
+        console.log('=== E:openPaSoRi ===');
     }
 
 
