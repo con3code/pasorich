@@ -1,5 +1,5 @@
 # PaSoRich - PaSoRi with Scratch 3.0
-Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るための拡張機能です。［注意：まだ開発段階］
+Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るための拡張機能です。
 
 手元にある様々なFelicaカードを使ったプログラムの開発が可能になることを目指しています。
 
@@ -7,22 +7,26 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 
 ## 必要なもの
 - SONY PaSoRiカードリーダー（RC-S380のみ対応）
-- Google Chrome（WebUSB対応するブラウザのみ）
-- Felicaカード
+- Google Chrome または Chromiumブラウザ
 - Scratch 3.0
 
 ---
 
-## 開発状況
-WebUSBによる動作実験段階です。
+## 動作環境
+- macOS（そのままで動作）
+- Windows（汎用USBドライバを導入することで動作。[Zadig](https://zadig.akeo.ie)等）
+- ChromeOS（そのままで動作）
+- Raspberry Pi（そのままで動作）
 
-ローカル環境だと動作するものの，サーバー経由だとWebUSB「navigator.usb.requestDevice」が動作しない問題がある模様。
+## 開発状況(0.3.0)
+WebUSBによる動作検証段階です。拡張機能追加後のPaSoRiリーダー脱着処理等は未作業。
 
-ローカル環境では，カード読み取りは可能であるものの，読み取ったIdmの反映に1秒程度待機が必要です。ブロックの構成見直し中。
+カード読み取りは可能であるものの，読み取ったIdmの反映に1秒程度待機が必要です。リーダーの動作状況を参照して待つブロックを利用します。
 
 ## 開発環境
 macOS上でローカルScratch3.0環境を構築して開発。
-他のプラットフォームでの動作は未確認。
+
+デモ環境をGitHub Pages上で構築　→　[https://con3office.github.io/scratch-gui/](https://con3office.github.io/scratch-gui/)
 
 ## 参考情報
 
@@ -36,3 +40,5 @@ macOS上でローカルScratch3.0環境を構築して開発。
 
 [How to Develop Your Own Block for Scratch 3.0](https://medium.com/@hiroyuki.osaki/how-to-develop-your-own-block-for-scratch-3-0-1b5892026421)
 
+## 開発者
+kotatsurin
