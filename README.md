@@ -7,10 +7,11 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 
 ## 必要なもの
 - SONY PaSoRiカードリーダー（RC-S380のみ対応）
-- Google Chrome または Chromiumブラウザ
-- Scratch 3.0
+- Google Chrome または Chromium互換ブラウザ
 
-デモ環境をGitHub Pages上で構築　→　[https://con3office.github.io/scratch-gui/](https://con3office.github.io/scratch-gui/)
+　デモ環境をGitHub Pages上で構築　→　[https://con3office.github.io/scratch-gui/](https://con3office.github.io/scratch-gui/)
+
+　デモプログラム　→　[https://github.com/con3office/pasorich/tree/master/demo-projects](https://github.com/con3office/pasorich/tree/master/demo-projects)
 
 ---
 
@@ -21,7 +22,10 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 - Raspberry Pi（そのままで動作）
 - Android（そのままで動作）
 
-## 開発状況(0.3.0)
+## 開発状況(0.3.5)
+- Idm変数のリセットブロックを追加
+- 新しいデモプログラムと電子音ファイル追加
+
 WebUSBによる動作検証段階です。拡張機能追加後のPaSoRiリーダー脱着処理等は未作業。
 
 カード読み取りは可能であるものの，読み取ったIdmの反映に1秒程度待機が必要です。リーダーの動作状況を参照して待つブロックを利用します。
