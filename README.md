@@ -19,7 +19,7 @@ Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るため
 - macOS（そのままで動作）
 - Windows（汎用USBドライバを導入することで動作。[Zadig](https://zadig.akeo.ie)等）
 - ChromeOS（そのままで動作）
-- Raspberry Pi（そのままで動作）
+- Raspberry Pi（要設定変更） https://qiita.com/frameair/items/596724fc2f3438ea7925
 - Android（そのままで動作）
 
 ## 開発状況(0.3.5)
