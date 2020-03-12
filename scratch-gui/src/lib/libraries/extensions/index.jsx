@@ -59,11 +59,12 @@ export default [
             />
         ),
         extensionId: 'pasorich',
+        collaborator: 'con3office',
         iconURL: pasorichImage,
         insetIconURL: pasorichInsetImage,
         description: (
             <FormattedMessage
-                defaultMessage="PaSoRi with Scratch 3.0"
+                defaultMessage="Read SmartCard's Idm"
                 description="Description for the 'PaSoRich' extension"
                 id="gui.extension.pasorich.description"
             />
