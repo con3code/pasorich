@@ -8,6 +8,7 @@ var pasoriDevice;
 var idnum;
 var gr_arr;
 var readingFlag = false;
+const intvalTime = 12;
 
 
  /**
@@ -69,91 +70,91 @@ function session(ss_device) {
 
     sleep(38).then(() => {
         send(ss_device, [0x00, 0x00, 0xff, 0x00, 0xff, 0x00], false);
-        return sleep(16);
+        return sleep(intvalTime);
     })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
         receive(ss_device, 6, false);
-        return sleep(16);
+        return sleep(intvalTime);
     })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 13, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
             receive(ss_device, 6, false);
-            return sleep(16);
+            return sleep(intvalTime);
         })
     .then(() => {
         receive(ss_device, 37, true);
-        return sleep(16);
+        return sleep(intvalTime);
     })
     .then(() => {
 	    
