@@ -1,4 +1,4 @@
-# PaSoRich - PaSoRi with Scratch 3.0
+# PaSoRich - SC2Scratch for PaSoRi to Scratch 3.0
 Scratch3.0でSONY PaSoRi (RC-S380) を使ってFelicaのIDmを読み取るための拡張機能です。
 
 手元にある様々なFelicaカードを使ったプログラムの開発が可能になることを目指しています。

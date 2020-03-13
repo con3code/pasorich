@@ -8,7 +8,7 @@ var pasoriDevice;
 var idnum;
 var gr_arr;
 var readingFlag = false;
-const intvalTime = 12;
+const intvalTime = 14;
 
 
  /**
