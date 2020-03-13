@@ -161,9 +161,9 @@ function session(ss_device) {
 //	    console.log(gr_arr);
 	    
 	    if (gr_arr != undefined){
-	        if (gr_arr.length > 24){
+	        if (gr_arr.length > 25){
 	            
-	            let idm = gr_arr.slice(17, 24);
+	            let idm = gr_arr.slice(17, 25);
 				if (idm.length > 0) {
             	    let idmStr = '';
 					for (let i = 0; i < idm.length; i++) {

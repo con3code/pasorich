@@ -36,6 +36,7 @@ PaSoRich (SC3Scratch for PaSoRi)や関連する情報はCC-BY-SAの条件にも�
 
 ## 利用情報
 PaSoRiを始め，ICカードをScratchで利用する関連情報を以下のサイトで公開しています。
+
 [SmartCard to Scratch3.0 - 拡張機能SC2Scratch関連情報サイト](https://con3.com/sc2scratch/)
 
 ## 参考情報
