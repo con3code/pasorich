@@ -32,7 +32,7 @@ WebUSBによる動作検証段階です。拡張機能追加後のPaSoRiリー�
 macOS上でローカルScratch3.0環境を構築して開発。
 
 ## ライセンス
-PaSoRich (SC3Scratch for PaSoRi)や関連する情報はCC-BY-SAの条件にもとづき自由に利用することができます。著作者表示はcon3officeとしており，これは開発者kotatsurin（林向達＠徳島文理大学）の仮想事務所の名称です。連絡不要ですが，活用例等の報告は大歓迎です。
+PaSoRich (SC3Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiとともに利用することを踏まえ，それらと同様の三条項BSDライセンス（BSD-3-clause）にもとづき自由に利用することができます。著作者表示はcon3officeとしており，これは開発者kotatsurin（林向達＠徳島文理大学）の仮想事務所の名称です。連絡不要ですが，活用例等の報告は大歓迎です。
 
 ## 利用情報
 PaSoRiを始め，ICカードをScratchで利用する関連情報を以下のサイトで公開しています。
