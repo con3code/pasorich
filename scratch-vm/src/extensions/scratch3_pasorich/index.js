@@ -12,7 +12,7 @@ var readingFlag = false;
 var connectingFlag = false;
 const intvalTime_long = 15;
 const intvalTime_short = 9;
-const PaSoRichVersion = "PaSoRich 0.3.9";
+const PaSoRichVersion = "PaSoRich 0.4.1";
 
 
  /**
@@ -477,11 +477,15 @@ class Scratch3Pasorich {
     openPasori () {
 //        console.log('=== S:openPaSoRi ===');
         
-        if(readingFlag){return isConnect;}
-        if(connectingFlag){return isConnect;}
+        if(readingFlag){
+            isConnect = "Reading...";
+            return isConnect;
+        }
+        if(connectingFlag){
+            isConnect = "Connecting...";
+            return isConnect;
+        }
         
-        connectingFlag = true;
-
         if (pasoriDevice !== undefined) {
             connectingFlag = false;
             isConnect = "Connected...";
@@ -489,6 +493,8 @@ class Scratch3Pasorich {
 //            pasoriDevice.close();
 //            pasoriDevice = null;
         }
+
+        connectingFlag = true;
 
         isConnect = "Connecting...";
 
@@ -526,6 +532,7 @@ class Scratch3Pasorich {
             });
         }
 
+
         var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
 
         while(reqdevicePromise == undefined){
@@ -558,7 +565,6 @@ class Scratch3Pasorich {
             });
         }
 
-        connectingFlag = false;
         return isConnect;
 
 //        console.log('=== E:openPaSoRi ===');
