@@ -9,10 +9,10 @@ var idnum;
 var isConnect = "Push to Connect.";
 var gr_arr;
 var readingFlag = false;
-var connectingFlag = false;
+var connectingCount = 0;
 const intvalTime_long = 15;
 const intvalTime_short = 9;
-const PaSoRichVersion = "PaSoRich 0.4.1";
+const PaSoRichVersion = "PaSoRich 0.4.3";
 
 
  /**
@@ -384,7 +384,7 @@ class Scratch3Pasorich {
                 session(pasoriDevice);
             }
             else{
-    
+   
                 var devicePromise = navigator.usb.getDevices();
             
                 while(devicePromise == undefined){
@@ -460,7 +460,8 @@ class Scratch3Pasorich {
     }
 
 	resetIdm () {
-		idnum = '';
+        idnum = '';
+        readingFlag = false;
         return;
     }
 
@@ -481,88 +482,96 @@ class Scratch3Pasorich {
             isConnect = "Reading...";
             return isConnect;
         }
-        if(connectingFlag){
-            isConnect = "Connecting...";
-            return isConnect;
-        }
         
-        if (pasoriDevice !== undefined) {
-            connectingFlag = false;
+        if (pasoriDevice !== undefined && pasoriDevice !== null) {
+            connectingCount = 0;
             isConnect = "Connected...";
             return isConnect;
 //            pasoriDevice.close();
 //            pasoriDevice = null;
         }
 
-        connectingFlag = true;
-
-        isConnect = "Connecting...";
-
-        var devicePromise = navigator.usb.getDevices();
-            
-        while(devicePromise == undefined){
-            sleep(intvalTime_short);
+        if(connectingCount >= 1){
+            isConnect = "Connecting...";
+            return isConnect;
         }
+        else {
 
-        if (devicePromise !== undefined) {
+            connectingCount += 1;
 
-            devicePromise.then(devices => {
-//                console.log(devices);
-                devices.map(selectedDevice => {
-                    pasoriDevice = selectedDevice;
-                    pasoriDevice.open()
-                    .then(() => 
-                        pasoriDevice.selectConfiguration(1)
-                    )
-                    .then(() => 
-                        pasoriDevice.claimInterface(0)
-                    );
+            isConnect = "Connecting...";
+
+            if (connectingCount > 1){
+                return isConnect;
+            }
+
+/*    
+            var devicePromise = navigator.usb.getDevices();
+                
+            while(devicePromise == undefined){
+                sleep(intvalTime_short);
+            }
+    
+            if (devicePromise !== undefined) {
+    
+                devicePromise.then(devices => {
+    //                console.log(devices);
+                    devices.map(selectedDevice => {
+                        pasoriDevice = selectedDevice;
+                        pasoriDevice.open()
+                        .then(() => 
+                            pasoriDevice.selectConfiguration(1)
+                        )
+                        .then(() => 
+                            pasoriDevice.claimInterface(0)
+                        );
+                    });
+                })
+                .then(() => {
+                    isConnect = "Success...";
+                    return isConnect;
+                })
+                .catch(error => {
+                    console.log(error);
+                    isConnect = "Failure...";
+                    return isConnect;
                 });
-            })
-            .then(() => {
-                connectingFlag = false;
-                isConnect = "Success...";
-                return isConnect;
-            })
-            .catch(error => {
-                console.log(error);
-                connectingFlag = false;
-                isConnect = "Failure...";
-                return isConnect;
-            });
-        }
+            }
+    
+*/
 
-
-        var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
-
-        while(reqdevicePromise == undefined){
-            sleep(intvalTime_short);
-        }
-
-        if (reqdevicePromise !== undefined) {
-           reqdevicePromise.then(selectedDevice => {
-                pasoriDevice = selectedDevice;
-                return pasoriDevice.open();
-            })
-            .then(() => {
+            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+    
+            while(reqdevicePromise == undefined){
                 sleep(intvalTime_short);
-                return pasoriDevice.selectConfiguration(1);
-            })
-            .then(() => {
-                sleep(intvalTime_short);
-                return pasoriDevice.claimInterface(0);
-            })
-            .then(() => {
-                connectingFlag = false;
-                isConnect = "Success...";
-                return isConnect;
-            })
-            .catch(error => {
-                 console.log(error);
-                 connectingFlag = false;
-                 isConnect = "Failure...";
-                 return isConnect;
-            });
+            }
+    
+            if (reqdevicePromise !== undefined) {
+               reqdevicePromise.then(selectedDevice => {
+                    pasoriDevice = selectedDevice;
+                    return pasoriDevice.open();
+                })
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return pasoriDevice.selectConfiguration(1);
+                })
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return pasoriDevice.claimInterface(0);
+                })
+                .then(() => {
+                    connectingCount = 0;
+                    isConnect = "Success...";
+                    return isConnect;
+                })
+                .catch(error => {
+                     console.log(error);
+                     pasoriDevice = null;
+                     connectingCount = 0;
+                     isConnect = "Failure...";
+                     return isConnect;
+                });
+            }
         }
 
         return isConnect;
