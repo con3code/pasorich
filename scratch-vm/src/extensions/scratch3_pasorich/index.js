@@ -6,11 +6,13 @@ const log = require('../../util/log');
 //PaSoRich Values
 var pasoriDevice;
 var idnum;
+var isConnect = "Push to Connect.";
 var gr_arr;
 var readingFlag = false;
+var connectingFlag = false;
 const intvalTime_long = 15;
 const intvalTime_short = 9;
-const PaSoRichVersion = "PaSoRich 0.3.8";
+const PaSoRichVersion = "PaSoRich 0.3.9";
 
 
  /**
@@ -311,6 +313,12 @@ class Scratch3Pasorich {
             blockIconURI: blockIconURI,
             blocks: [
                 {
+                    opcode: 'openPasori',
+                    text: 'Connect',
+                    blockType: BlockType.REPORTER
+                },
+                '---',
+                {
                     opcode: 'readPasori',
                     text: 'read PaSoRi',
                     blockType: BlockType.COMMAND,
@@ -469,11 +477,53 @@ class Scratch3Pasorich {
     openPasori () {
 //        console.log('=== S:openPaSoRi ===');
         
-        if(readingFlag){return;}
+        if(readingFlag){return isConnect;}
+        if(connectingFlag){return isConnect;}
+        
+        connectingFlag = true;
 
-        if (pasoriDevice != null) {
-            pasoriDevice.close();
-            pasoriDevice = null;
+        if (pasoriDevice !== undefined) {
+            connectingFlag = false;
+            isConnect = "Connected...";
+            return isConnect;
+//            pasoriDevice.close();
+//            pasoriDevice = null;
+        }
+
+        isConnect = "Connecting...";
+
+        var devicePromise = navigator.usb.getDevices();
+            
+        while(devicePromise == undefined){
+            sleep(intvalTime_short);
+        }
+
+        if (devicePromise !== undefined) {
+
+            devicePromise.then(devices => {
+//                console.log(devices);
+                devices.map(selectedDevice => {
+                    pasoriDevice = selectedDevice;
+                    pasoriDevice.open()
+                    .then(() => 
+                        pasoriDevice.selectConfiguration(1)
+                    )
+                    .then(() => 
+                        pasoriDevice.claimInterface(0)
+                    );
+                });
+            })
+            .then(() => {
+                connectingFlag = false;
+                isConnect = "Success...";
+                return isConnect;
+            })
+            .catch(error => {
+                console.log(error);
+                connectingFlag = false;
+                isConnect = "Failure...";
+                return isConnect;
+            });
         }
 
         var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
@@ -495,25 +545,21 @@ class Scratch3Pasorich {
                 sleep(intvalTime_short);
                 return pasoriDevice.claimInterface(0);
             })
-            .catch(error => { console.log(error); });
+            .then(() => {
+                connectingFlag = false;
+                isConnect = "Success...";
+                return isConnect;
+            })
+            .catch(error => {
+                 console.log(error);
+                 connectingFlag = false;
+                 isConnect = "Failure...";
+                 return isConnect;
+            });
         }
 
-/**
-        navigator.usb.getDevices().then(devices => {
-            console.log(devices);
-            devices.map(selectedDevice => {
-                pasoriDevice = selectedDevice;
-                pasoriDevice.open()
-                .then(() => 
-                    pasoriDevice.selectConfiguration(1)
-                )
-                .then(() => 
-                    pasoriDevice.claimInterface(0)
-                );
-            });
-        })
-        .catch(error => { console.log(error); });
-*/
+        connectingFlag = false;
+        return isConnect;
 
 //        console.log('=== E:openPaSoRi ===');
 
