@@ -9,8 +9,8 @@ var idnum;
 var gr_arr;
 var readingFlag = false;
 const intvalTime_long = 15;
-const intvalTime_short = 10;
-const PaSoRichVersion = "PaSoRich 0.3.7";
+const intvalTime_short = 9;
+const PaSoRichVersion = "PaSoRich 0.3.8";
 
 
  /**
@@ -83,85 +83,85 @@ function session(ss_device) {
         return sleep(intvalTime_long);
     })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x2a, 0x01, 0xff, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
         receive(ss_device, 6, false);
         return sleep(intvalTime_short);
     })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x03, 0x00, 0xfd, 0xd6, 0x06, 0x00, 0x24, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_long); //addressed..
+    })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x06, 0x00, 0xfa, 0xd6, 0x00, 0x01, 0x01, 0x0f, 0x01, 0x18, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x28, 0x00, 0xd8, 0xd6, 0x02, 0x00, 0x18, 0x01, 0x01, 0x02, 0x01, 0x03, 0x00, 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x07, 0x08, 0x08, 0x00, 0x09, 0x00, 0x0a, 0x00, 0x0b, 0x00, 0x0c, 0x00, 0x0e, 0x04, 0x0f, 0x00, 0x10, 0x00, 0x11, 0x00, 0x12, 0x00, 0x13, 0x06, 0x4b, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x04, 0x00, 0xfc, 0xd6, 0x02, 0x00, 0x18, 0x10, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            receive(ss_device, 13, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 13, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
-            send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false);
-            return sleep(intvalTime_long);
-        })
+        send(ss_device, [0x00, 0x00, 0xff, 0xff, 0xff, 0x0a, 0x00, 0xf6, 0xd6, 0x04, 0x6e, 0x00, 0x06, 0x00, 0xff, 0xff, 0x01, 0x00, 0xb3, 0x00], false);
+        return sleep(intvalTime_long);
+    })
     .then(() => {
-            receive(ss_device, 6, false);
-            return sleep(intvalTime_short);
-        })
+        receive(ss_device, 6, false);
+        return sleep(intvalTime_short);
+    })
     .then(() => {
         receive(ss_device, 37, true);
         return sleep(intvalTime_short);
@@ -174,6 +174,7 @@ function session(ss_device) {
 	        if (gr_arr.length > 25){
 	            
 	            let idm = gr_arr.slice(17, 25);
+//        	    console.log("sliced: " + idm);
                 if (idm.length > 0) {
             	    let idmStr = '';
 					for (let i = 0; i < idm.length; i++) {
@@ -224,43 +225,78 @@ class Scratch3Pasorich {
         this.runtime = runtime;
 
 //        console.log("initializing...");
-        if (pasoriDevice != null) {
-            pasoriDevice.close();
-            pasoriDevice = null;
-        }
-
+//		console.log("navigator:");
 //		console.log(navigator);
+//		console.log("navigator.usb:");
 //		console.log(navigator.usb);
- 
-        var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+//		console.log("pasoriDevice:");
+//		console.log(pasoriDevice);
 
-        while(reqdevicePromise == undefined){
-            sleep(intvalTime_short);
+        if (pasoriDevice !== undefined) {
+            if(pasoriDevice.opened){
+                pasoriDevice.close();
+//                console.log("- pasoriDevice:" + pasoriDevice);
+            }
         }
-    
-        if (reqdevicePromise !== undefined) {
 
-            reqdevicePromise.then(selectedDevice => {
-                pasoriDevice = selectedDevice;
-                return pasoriDevice.open();
-            })
-            .then(() => {
-                sleep(intvalTime_short);
-                return pasoriDevice.selectConfiguration(1);
-            })
-            .then(() => {
-                sleep(intvalTime_short);
-                return pasoriDevice.claimInterface(0);
-            })
-		    .then(() => {
-                sleep(intvalTime_short);
-		    	return session(pasoriDevice);
+//            console.log("open_21" + pasoriDevice);
+
+            navigator.usb.getDevices().then(devices => {
+//                console.log(devices);
+                devices.map(selectedDevice => {
+                    pasoriDevice = selectedDevice;
+                    pasoriDevice.open()
+                    .then(() => 
+                        pasoriDevice.selectConfiguration(1)
+                    )
+                    .then(() => 
+                        pasoriDevice.claimInterface(0)
+                    );
+                });
             })
             .catch(error => { console.log(error); });
 
-            console.log(PaSoRichVersion);
-//           console.log("init_done");
+//            console.log("open_22" + pasoriDevice);
+
+
+        if(pasoriDevice == null){
+
+//            console.log("open_11" + pasoriDevice);
+ 
+            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+
+            while(reqdevicePromise == undefined){
+                sleep(intvalTime_short);
+            }
+
+            if (reqdevicePromise !== undefined) {
+
+                reqdevicePromise.then(selectedDevice => {
+                pasoriDevice = selectedDevice;
+                return pasoriDevice.open();
+                })
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return pasoriDevice.selectConfiguration(1);
+                })
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return pasoriDevice.claimInterface(0);
+                })
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return session(pasoriDevice);
+                })
+                .catch(error => { console.log(error); });
+
+//                console.log("open_12" + pasoriDevice);
+
+            }
         }
+
+        console.log(PaSoRichVersion);
+
+//       console.log("init_done");
     }
 
 
@@ -324,8 +360,6 @@ class Scratch3Pasorich {
     }
 
 
-
-
     readPasori () {
 //        console.log('=== S:readPaSoRi ===');
 
@@ -334,22 +368,60 @@ class Scratch3Pasorich {
 
 		idnum = '';
 
-        if(pasoriDevice.opened){
-            pasoriDevice.close();
-        }
+//        console.log("read_11" + pasoriDevice);
 
-        var devicePromise = navigator.usb.getDevices();
+        if(pasoriDevice !== undefined){
+
+            if(pasoriDevice.opened && pasoriDevice !== null){
+                session(pasoriDevice);
+            }
+            else{
+    
+                var devicePromise = navigator.usb.getDevices();
+            
+                while(devicePromise == undefined){
+                    sleep(intvalTime_short);
+                }
         
-        while(devicePromise == undefined){
-            sleep(intvalTime_short);
-        }
+                if (devicePromise !== undefined) {
+                    devicePromise.then(devices => {
+        //            console.log(devices);
+                        devices.map(selectedDevice => {
+                            pasoriDevice = selectedDevice;
+                            pasoriDevice.open().then(() => {
+                                sleep(intvalTime_short);
+                                return pasoriDevice.selectConfiguration(1);
+                            })
+                            .then(() => {
+                                sleep(intvalTime_short);
+                                return pasoriDevice.claimInterface(0);
+                            })
+                            .then(() => {
+                                sleep(intvalTime_short);
+                                return session(pasoriDevice);
+                            })
+                            .catch(error => { console.log(error); });
+        
+                        });
+                    })
+                    .catch(error => { console.log(error); });
+                }
+        
+//select
 
-        if (devicePromise !== undefined) {
-            devicePromise.then(devices => {
-//            console.log(devices);
-                devices.map(selectedDevice => {
-                    pasoriDevice = selectedDevice;
-                    pasoriDevice.open().then(() => {
+                var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+
+                while(reqdevicePromise == undefined){
+                    sleep(intvalTime_short);
+                }
+    
+                if (reqdevicePromise !== undefined) {
+    
+                    reqdevicePromise.then(selectedDevice => {
+                        pasoriDevice = selectedDevice;
+                        return pasoriDevice.open();
+                    })
+                    .then(() => {
                         sleep(intvalTime_short);
                         return pasoriDevice.selectConfiguration(1);
                     })
@@ -359,15 +431,16 @@ class Scratch3Pasorich {
                     })
                     .then(() => {
                         sleep(intvalTime_short);
-			        	return session(pasoriDevice);
+                        return session(pasoriDevice);
                     })
                     .catch(error => { console.log(error); });
 
-                });
+                }
 
-            })
-            .catch(error => { console.log(error); });
+            }
         }
+//        console.log("read_12" + pasoriDevice);
+
 //        console.log('=== E:readPaSoRi ===');
     }
 
@@ -392,6 +465,7 @@ class Scratch3Pasorich {
     }
     
     
+
     openPasori () {
 //        console.log('=== S:openPaSoRi ===');
         
@@ -442,6 +516,7 @@ class Scratch3Pasorich {
 */
 
 //        console.log('=== E:openPaSoRi ===');
+
     }
 
 
@@ -452,4 +527,5 @@ class Scratch3Pasorich {
 
 
 }
+
 module.exports = Scratch3Pasorich;
