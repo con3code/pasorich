@@ -27,7 +27,7 @@ var isConnect = formatMessage({
 });
 const intvalTime_long = 15;
 const intvalTime_short = 9;
-const PaSoRichVersion = "PaSoRich 0.5.7";
+const PaSoRichVersion = "PaSoRich 0.6.0";
 
 
  /**
@@ -380,6 +380,15 @@ class Scratch3Pasorich {
                     blockType: BlockType.COMMAND,
                 },
                 {
+                    opcode: 'readingDone',
+                    text: formatMessage({
+                        id: 'pasorich.readingDone',
+                        default: 'done',
+                        description: 'readingDone'
+                    }),
+                    blockType: BlockType.BOOLEAN
+                },
+                {
                     opcode: 'getIdm',
                     text: formatMessage({
                         id: 'pasorich.getIdm',
@@ -396,7 +405,9 @@ class Scratch3Pasorich {
                         description: 'resetIdm'
                     }),
                     blockType: BlockType.COMMAND,
-                },
+                }
+/**
+
                 {
                     opcode: 'getReadingFlag',
                     text: formatMessage({
@@ -415,7 +426,6 @@ class Scratch3Pasorich {
                     }),
                     blockType: BlockType.BOOLEAN
                 }
-/**
                 ,
                 {
                     opcode: 'getHashedIdm',
@@ -531,6 +541,10 @@ class Scratch3Pasorich {
         idnum_sha256 ='';
         readingFlag = false;
         return;
+    }
+
+    readingDone () {
+        return !readingFlag;
     }
 
     getReadingFlag () {
@@ -660,6 +674,7 @@ class Scratch3Pasorich {
                 'pasorich.resetIdm': 'Idmリセット',
                 'pasorich.getReadingFlag': '読取中',
                 'pasorich.getWaitingFlag': '待機中',
+                'pasorich.readingDone': '読み取り完了',
                 'pasorich.ConnectReading': '読取中...',
                 'pasorich.push2Connect': 'クリックして接続開始',
                 'pasorich.ConnectConnected': '接続完了...',
@@ -676,6 +691,7 @@ class Scratch3Pasorich {
                 'pasorich.resetIdm': 'Idmリセット',
                 'pasorich.getReadingFlag': 'よみとりちゅう',
                 'pasorich.getWaitingFlag': 'たいきちゅう',
+                'pasorich.readingDone': 'よみとりかんりょう',
                 'pasorich.ConnectReading': 'よみとりちゅう...',
                 'pasorich.push2Connect': 'クリックしてせつぞくかいし',
                 'pasorich.ConnectConnected': 'せつぞくかんりょう...',
