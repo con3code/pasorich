@@ -6,7 +6,7 @@ SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのS
 ---
 
 ## 必要なもの
-- SONY PaSoRiカードリーダー（RC-S380のみ対応）
+- SONY PaSoRiカードリーダー（[RC-S380](https://www.sony.co.jp/Products/felica/consumer/products/RC-S380.html)のみ対応）
 - Google Chrome，Microsoft Edge 等のWebUSB対応ブラウザ
 
 ## 動作環境
