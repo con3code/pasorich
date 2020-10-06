@@ -27,7 +27,7 @@ var isConnect = formatMessage({
     description: 'push2Connect'
 });
 const intvalTime_short = 12;
-const PaSoRichVersion = "PaSoRich 0.6.6";
+const PaSoRichVersion = "PaSoRich 0.6.7";
 
 
  /**
@@ -140,9 +140,9 @@ function receive(r_device, len, cpy) {
 
 
 function session(ss_device) {
-//    console.log("=== S:session ===");
-//    console.log("ss_device:");
-//    console.log(ss_device);
+    //console.log("=== S:session ===");
+    //console.log("ss_device:");
+    //console.log(ss_device);
 
 
     sleep(1).then(() => {
@@ -288,7 +288,7 @@ function session(ss_device) {
 
     return reading_waiter(1);
 
-    //    console.log("=== E:session ===");
+    //console.log("=== E:session ===");
 
 }
 
@@ -690,7 +690,7 @@ class Scratch3Pasorich {
             'ja': {
                 'pasorich.PaSoRich': 'パソリッチ',
                 'pasorich.Connect': '接続',
-                'pasorich.readPasori': 'PaSoRi 読み取り',
+                'pasorich.readPasori': 'パソリ読み取り',
                 'pasorich.getIdm': 'Idm',
                 'pasorich.getHashedIdm': 'HexIdm',
                 'pasorich.resetIdm': 'Idmリセット',
@@ -707,7 +707,7 @@ class Scratch3Pasorich {
             'ja-Hira': {
                 'pasorich.PaSoRich': 'ぱそりっち',
                 'pasorich.Connect': 'せつぞく',
-                'pasorich.readPasori': 'PaSoRi よみとり',
+                'pasorich.readPasori': 'パソリよみとり',
                 'pasorich.getIdm': 'Idm',
                 'pasorich.getHashedIdm': 'HexIdm',
                 'pasorich.resetIdm': 'Idmリセット',
