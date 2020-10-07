@@ -15,9 +15,10 @@ const formatMessage = require('format-message');
 
 // Variables
 var pasoriDevice;
-var idnum;
-var idnum_sha256;
-var gr_arr;
+var idnum = '';
+var idnum_sha256 = '';
+var gr_arr = '';
+var deviceFlag = false;
 var readingFlag = false;
 var inoutFlag = false;
 var connectingCount = 0;
@@ -27,7 +28,7 @@ var isConnect = formatMessage({
     description: 'push2Connect'
 });
 const intvalTime_short = 12;
-const PaSoRichVersion = "PaSoRich 0.6.7";
+const PaSoRichVersion = "PaSoRich 0.6.8";
 
 
  /**
@@ -100,6 +101,7 @@ function send(s_device, data) {
     inoutFlag = true;    
     let uint8a = new Uint8Array(data);
     //console.log("snd -> ");
+
     return s_device.transferOut(2, uint8a)
     .then(() => {inoutFlag = false;})
     .catch(() => {inoutFlag = false;});
@@ -110,15 +112,14 @@ function receive(r_device, len, cpy) {
     //console.log("rcv <- " + len);
     if(inoutFlag){return;}
     inoutFlag = true;    
+
     var receiveTrans = r_device.transferIn(1, len);
 
     while(receiveTrans == undefined){
         sleep(intvalTime_short);
-        //console.log('receive undefineding...');
     }
 
     if(receiveTrans !== undefined){
-        //console.log('receiving...');
         receiveTrans.then(result => {
             let arr = [];
             for (let i = result.data.byteOffset; i < result.data.byteLength; i++) {
@@ -140,10 +141,6 @@ function receive(r_device, len, cpy) {
 
 
 function session(ss_device) {
-    //console.log("=== S:session ===");
-    //console.log("ss_device:");
-    //console.log(ss_device);
-
 
     sleep(1).then(() => {
         send(ss_device, [0x00, 0x00, 0xff, 0x00, 0xff, 0x00], false);
@@ -288,8 +285,6 @@ function session(ss_device) {
 
     return reading_waiter(1);
 
-    //console.log("=== E:session ===");
-
 }
 
 
@@ -300,6 +295,7 @@ function session(ss_device) {
  */
 
 class Scratch3Pasorich {
+
     constructor (runtime) {
         /**
          * The runtime instantiating this block package.
@@ -332,12 +328,18 @@ class Scratch3Pasorich {
                 )
                 .then(() =>
                     pasoriDevice.claimInterface(0)
-                );
+                )
+                .then(() => {
+                   deviceFlag = true;
+                });
             });
         })
-        .catch(error => { console.log(error); });
+        .catch((error) => {
+            deviceFlag = false;
+            console.log(error);
+        });
 
-
+        
         if(pasoriDevice == null){
 
             var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
@@ -359,10 +361,16 @@ class Scratch3Pasorich {
                     return pasoriDevice.claimInterface(0);
                 })
                 .then(() => {
+                    deviceFlag = true;
+                 }) 
+                .then(() => {
                     sleep(intvalTime_short);
                     return session(pasoriDevice);
                 })
-                .catch(error => { console.log(error); });
+                .catch((error) => {
+                    deviceFlag = false;
+                    console.log(error);
+                });
 
             }
         }
@@ -438,15 +446,16 @@ class Scratch3Pasorich {
                     blockType: BlockType.COMMAND,
                 }
                 /*
-                {
+                ,{
                     opcode: 'getReadingFlag',
                     text: formatMessage({
                         id: 'pasorich.getReadingFlag',
                         default: 'reading',
                         description: 'getReadingFlag'
                     }),
-                    blockType: BlockType.BOOLEAN
+                    blockType: BlockType.REPORTER
                 },
+
                 {
                     opcode: 'getWaitingFlag',
                     text: formatMessage({
@@ -474,120 +483,9 @@ class Scratch3Pasorich {
     }
 
 
-    readPasori () {
-
-        //console.log('=== S:readPaSoRi ===');
-
-        if(readingFlag){return;}
-        readingFlag = true;
-
-
-        if(pasoriDevice !== undefined){
-
-            if(pasoriDevice.opened && pasoriDevice !== null){
-                sleep(intvalTime_short);
-                return session(pasoriDevice);
-            }
-            else{
-
-                var devicePromise = navigator.usb.getDevices();
-
-                while(devicePromise == undefined){
-                    sleep(intvalTime_short);
-                }
-
-                if (devicePromise !== undefined) {
-                    devicePromise.then(devices => {
-                        //console.log(devices);
-                        devices.map(selectedDevice => {
-                            pasoriDevice = selectedDevice;
-                            pasoriDevice.open().then(() => {
-                                return pasoriDevice.selectConfiguration(1);
-                            })
-                            .then(() => {
-                                return pasoriDevice.claimInterface(0);
-                            })
-                            .then(() => {
-                                sleep(intvalTime_short);
-                                return session(pasoriDevice);
-                            })
-                            .catch(error => { console.log(error); });
-
-                        });
-                    })
-                    .catch(error => { console.log(error); });
-                }
-
-            //select
-
-                var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
-
-                while(reqdevicePromise == undefined){
-                    sleep(intvalTime_short);
-                }
-
-                if (reqdevicePromise !== undefined) {
-
-                    reqdevicePromise.then(selectedDevice => {
-                        pasoriDevice = selectedDevice;
-                        return pasoriDevice.open();
-                    })
-                    .then(() => {
-                        return pasoriDevice.selectConfiguration(1);
-                    })
-                    .then(() => {
-                        return pasoriDevice.claimInterface(0);
-                    })
-                    .then(() => {
-                        sleep(intvalTime_short);
-                        return session(pasoriDevice);
-                    })
-                    .catch(error => { console.log(error); });
-
-                }
-
-            }
-
-        }
-
-        //console.log('=== E:readPaSoRi ===');
-
-    }
-
-
-    getIdm () {
-		//console.log('=== S:getIdm ===');
-        return idnum;
-    }
-
-	resetIdm () {
-        idnum = '';
-        idnum_sha256 ='';
-        readingFlag = false;
-        return;
-    }
-
-    readingDone () {
-        return !readingFlag;
-    }
-
-    getReadingFlag () {
-        return readingFlag;
-    }
-
-	getWaitingFlag () {
-        return !readingFlag;
-    }
-
-    getHashedIdm () {
-        //console.log("HashedIdm: " + idnum_sha256);
-        return idnum_sha256;
-    }
-
-
     openPasori () {
-        //console.log('=== S:openPaSoRi ===');
 
+        /*
         if(readingFlag){
             isConnect = formatMessage({
                 id: 'pasorich.ConnectReading',
@@ -596,8 +494,9 @@ class Scratch3Pasorich {
             });
             return isConnect;
         }
+        */
 
-        if (pasoriDevice !== undefined && pasoriDevice !== null) {
+        if (deviceFlag || (pasoriDevice !== undefined && pasoriDevice !== null)) {
             connectingCount = 0;
             isConnect = formatMessage({
                 id: 'pasorich.ConnectConnected',
@@ -605,8 +504,6 @@ class Scratch3Pasorich {
                 description: 'ConnectConnected'
             });
             return isConnect;
-            //pasoriDevice.close();
-            //pasoriDevice = null;
         }
 
         if(connectingCount >= 1){
@@ -657,30 +554,163 @@ class Scratch3Pasorich {
                     });
                     return isConnect;
                 })
+                .then(() => {
+                    deviceFlag = true;
+                 }) 
                 .catch((error) => {
-                     console.log(error);
-                     pasoriDevice = null;
-                     connectingCount = 0;
-                     isConnect = formatMessage({
+                    deviceFlag = false;
+                    console.log(error);
+                    pasoriDevice = null;
+                    connectingCount = 0;
+                    isConnect = formatMessage({
                         id: 'pasorich.ConnectFailure',
                         default: 'Failure...',
                         description: 'ConnectFailure'
                     });
-                     return isConnect;
+                    return isConnect;
                 });
             }
         }
 
         return isConnect;
 
-        //console.log('=== E:openPaSoRi ===');
-
     }
 
-
+    
+    //no
     closePasori () {
         if(readingFlag){return;}
         return pasoriDevice.close();
+    }
+
+
+    readPasori () {
+
+        if(readingFlag){return;}
+        readingFlag = true;
+
+        if(deviceFlag){
+
+            if(pasoriDevice.opened && pasoriDevice !== null){
+                sleep(intvalTime_short);
+                return session(pasoriDevice);
+            }
+            else {
+
+                var devicePromise = navigator.usb.getDevices();
+
+                while(devicePromise == undefined){
+                    sleep(intvalTime_short);
+                }
+
+                if (devicePromise !== undefined) {
+                    devicePromise.then(devices => {
+                        //console.log(devices);
+                        devices.map(selectedDevice => {
+                            pasoriDevice = selectedDevice;
+                            pasoriDevice.open().then(() => {
+                                return pasoriDevice.selectConfiguration(1);
+                            })
+                            .then(() => {
+                                return pasoriDevice.claimInterface(0);
+                            })
+                            .then(() => {
+                                deviceFlag = true;
+                            }) 
+                            .then(() => {
+                                sleep(intvalTime_short);
+                                return session(pasoriDevice);
+                            })
+                            .catch((error) => {
+                                deviceFlag = false;
+                                readingFlag = false;
+                                console.log(error);
+                            });
+
+                        });
+                    })
+                    .catch((error) => { 
+                        deviceFlag = false;
+                        readingFlag = false;
+                        console.log(error);
+                    });
+                }
+
+            }
+
+        }
+        else {
+            //select
+
+            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+
+            while(reqdevicePromise == undefined){
+                sleep(intvalTime_short);
+            }
+
+            if (reqdevicePromise !== undefined) {
+
+                reqdevicePromise.then(selectedDevice => {
+                    pasoriDevice = selectedDevice;
+                    return pasoriDevice.open();
+                })
+                .then(() => {
+                    return pasoriDevice.selectConfiguration(1);
+                })
+                .then(() => {
+                    return pasoriDevice.claimInterface(0);
+                })
+                .then(() => {
+                    deviceFlag = true;
+                }) 
+                .then(() => {
+                    sleep(intvalTime_short);
+                    return session(pasoriDevice);
+                })
+                .catch((error) => {
+                    deviceFlag = false;
+                    readingFlag = false;
+                    console.log(error);
+                });
+
+            }
+
+        }
+                
+    }
+
+
+    getIdm () {
+        return idnum;
+    }
+
+	resetIdm () {
+        idnum = '';
+        idnum_sha256 ='';
+        readingFlag = false;
+        return;
+    }
+
+
+    //no
+    readingDone () {
+        return !readingFlag;
+    }
+
+    //no
+    getReadingFlag () {
+        return readingFlag;
+    }
+
+    //no
+	getWaitingFlag () {
+        return !readingFlag;
+    }
+
+    //no
+    getHashedIdm () {
+        //console.log("HashedIdm: " + idnum_sha256);
+        return idnum_sha256;
     }
 
 
