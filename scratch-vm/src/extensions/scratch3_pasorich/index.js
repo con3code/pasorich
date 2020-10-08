@@ -28,7 +28,7 @@ var isConnect = formatMessage({
     description: 'push2Connect'
 });
 const intvalTime_short = 12;
-const PaSoRichVersion = "PaSoRich 0.6.8";
+const PaSoRichVersion = "PaSoRich 0.6.9";
 
 
  /**
@@ -247,7 +247,7 @@ function session(ss_device) {
 						}
 						idmStr += idm[i].toString(16);
 					}
-					//console.log("Idm: " + idmStr);
+					//console.log("IDm: " + idmStr);
                     idnum = JSON.parse(JSON.stringify(idmStr));
 
 
@@ -258,7 +258,7 @@ function session(ss_device) {
                     crypto.subtle.digest('SHA-256', new TextEncoder().encode(idnum))
                     .then(idnumStr => {
                         idnum_sha256 = hexString(idnumStr);
-    					//console.log("HashedIdm: " + idnum_sha256);
+    					//console.log("HashedIDm: " + idnum_sha256);
                     });
 
             	}
@@ -431,7 +431,7 @@ class Scratch3Pasorich {
                     opcode: 'getIdm',
                     text: formatMessage({
                         id: 'pasorich.getIdm',
-                        default: 'Idm',
+                        default: 'IDm',
                         description: 'getIdm'
                     }),
                     blockType: BlockType.REPORTER
@@ -440,8 +440,8 @@ class Scratch3Pasorich {
                     opcode: 'resetIdm',
                     text: formatMessage({
                         id: 'pasorich.resetIdm',
-                        default: 'reset Idm',
-                        description: 'resetIdm'
+                        default: 'reset IDm',
+                        description: 'reset IDm and Variables'
                     }),
                     blockType: BlockType.COMMAND,
                 }
@@ -470,7 +470,7 @@ class Scratch3Pasorich {
                     opcode: 'getHashedIdm',
                     text: formatMessage({
                         id: 'pasorich.getHashedIdm',
-                        default: 'HashedIdm',
+                        default: 'HashedIDm',
                         description: 'getHashedIdm'
                     }),
                     blockType: BlockType.REPORTER
@@ -709,7 +709,7 @@ class Scratch3Pasorich {
 
     //no
     getHashedIdm () {
-        //console.log("HashedIdm: " + idnum_sha256);
+        //console.log("HashedIDm: " + idnum_sha256);
         return idnum_sha256;
     }
 
@@ -721,9 +721,9 @@ class Scratch3Pasorich {
                 'pasorich.PaSoRich': 'パソリッチ',
                 'pasorich.Connect': '接続',
                 'pasorich.readPasori': 'パソリ読み取り',
-                'pasorich.getIdm': 'Idm',
-                'pasorich.getHashedIdm': 'HexIdm',
-                'pasorich.resetIdm': 'Idmリセット',
+                'pasorich.getIdm': 'IDm',
+                'pasorich.getHashedIdm': 'HexIDm',
+                'pasorich.resetIdm': 'IDmリセット',
                 'pasorich.getReadingFlag': '読取中',
                 'pasorich.getWaitingFlag': '待機中',
                 'pasorich.readingDone': '読み取り完了',
@@ -738,9 +738,9 @@ class Scratch3Pasorich {
                 'pasorich.PaSoRich': 'ぱそりっち',
                 'pasorich.Connect': 'せつぞく',
                 'pasorich.readPasori': 'パソリよみとり',
-                'pasorich.getIdm': 'Idm',
-                'pasorich.getHashedIdm': 'HexIdm',
-                'pasorich.resetIdm': 'Idmリセット',
+                'pasorich.getIdm': 'IDm',
+                'pasorich.getHashedIdm': 'HexIDm',
+                'pasorich.resetIdm': 'IDmリセット',
                 'pasorich.getReadingFlag': 'よみとりちゅう',
                 'pasorich.getWaitingFlag': 'たいきちゅう',
                 'pasorich.readingDone': 'よみとりかんりょう',
