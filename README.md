@@ -13,7 +13,7 @@ SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのS
 - macOS（そのままで動作）
 - Windows（汎用USBドライバを導入することで動作。[Zadig](https://zadig.akeo.ie)等）
 - ChromeOS（そのままで動作）
-- Raspberry Pi（要設定変更） https://qiita.com/frameair/items/596724fc2f3438ea7925
+- Raspberry Pi（要権限設定） https://qiita.com/frameair/items/596724fc2f3438ea7925
 - Android（そのままで動作）
 
 　※iOSでは利用できません。
@@ -30,6 +30,9 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 ---
 
 ## 開発状況
+### (0.7.0)
+- コードの見直し整理
+
 ### (0.6.9)
 - 「IDm」に表記変更
 
@@ -56,8 +59,8 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 
 
 ## 開発環境
-macOS上でローカルScratch3.0環境を構築。
-JavaScript言語によりScratch3.0拡張機能として開発。
+ローカルScratch3.0環境にて，JavaScript言語を使用して開発。
+macOS Catalina／Visual Studio Code／Google Chrome
 
 ## ライセンス
 PaSoRich (SC3Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiとともに利用することを踏まえ，それらと同様の三条項BSDライセンス（BSD-3-clause）にもとづき自由に利用することができます。著作者表示はcon3officeとしており，これは開発者kotatsurin（林向達＠徳島文理大学）の仮想事務所の名称です。連絡不要ですが，活用例等の報告は大歓迎です。
@@ -73,6 +76,8 @@ PaSoRich (SC3Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiと�
 [WebUSBでFeliCaの一意なIDであるIDmを読む - Qiita](https://qiita.com/saturday06/items/333fcdf5b3b8030c9b05)
 
 [How to Develop Your Own Block for Scratch 3.0](https://medium.com/@hiroyuki.osaki/how-to-develop-your-own-block-for-scratch-3-0-1b5892026421)
+
+PaSoRich自体はインターネット接続を必要としませんが，クラウドとの連携は拡張機能[NumberBank](https://con3.com/numberbank/)を利用することができます。
 
 ## 開発者
 kotatsurin
