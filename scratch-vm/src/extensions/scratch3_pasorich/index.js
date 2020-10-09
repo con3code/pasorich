@@ -14,15 +14,15 @@ const log = require('../../util/log');
 const formatMessage = require('format-message');
 
 // Variables
-var pasoriDevice;
-var idmNum = '';
-var idmNumSha256 = '';
-var globalCpyRcvArray = '';
-var deviceFlag = false;
-var readingFlag = false;
-var inoutFlag = false;
-var connectingCount = 0;
-var isConnect = formatMessage({
+let pasoriDevice;
+let idmNum = '';
+let idmNumSha256 = '';
+let globalCpyRcvArray = '';
+let deviceFlag = false;
+let readingFlag = false;
+let inoutFlag = false;
+let connectingCount = 0;
+let isConnect = formatMessage({
     id: 'pasorich.push2Connect',
     default: 'Push to Connect.',
     description: 'push2Connect'
@@ -121,7 +121,7 @@ function receive(receiveDevice, len, cpy) {
 
     //console.log("rcv <- " + len);
 
-    var receiveData = receiveDevice.transferIn(1, len);
+    let receiveData = receiveDevice.transferIn(1, len);
 
     while(receiveData == undefined){
         sleep(intvalTimeShort);
@@ -354,7 +354,7 @@ class Scratch3Pasorich {
         
         if(pasoriDevice == null){
 
-            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+            let reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
 
             while(reqdevicePromise == undefined){
                 sleep(intvalTimeShort);
@@ -508,7 +508,7 @@ class Scratch3Pasorich {
                 return isConnect;
             }
 
-            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+            let reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
 
             while(reqdevicePromise == undefined){
                 sleep(intvalTimeShort);
@@ -575,7 +575,7 @@ class Scratch3Pasorich {
             }
             else {
 
-                var devicePromise = navigator.usb.getDevices();
+                let devicePromise = navigator.usb.getDevices();
 
                 while(devicePromise == undefined){
                     sleep(intvalTimeShort);
@@ -618,7 +618,7 @@ class Scratch3Pasorich {
         else {
             //select
 
-            var reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
+            let reqdevicePromise = navigator.usb.requestDevice({ filters: [{ vendorId: 0x054c }] });
 
             while(reqdevicePromise == undefined){
                 sleep(intvalTimeShort);
