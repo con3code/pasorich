@@ -64,12 +64,15 @@ export default [
         insetIconURL: pasorichInsetImage,
         description: (
             <FormattedMessage
-                defaultMessage="Read SmartCard's Idm"
+                defaultMessage="Read SmartCard's IDm."
                 description="Description for the 'PaSoRich' extension"
                 id="gui.extension.pasorich.description"
             />
         ),
-        featured: true
+        internetConnectionRequired: false,
+        featured: true,
+        disabled: false,
+        helpLink: 'https://con3.com/sc2scratch/'
     },
     {
         name: (
