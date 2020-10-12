@@ -3,6 +3,8 @@ SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのS
 
 スマートカード（Felicaカード）を使ったプログラム開発が可能になることを目指しています。
 
+<img src="https://www.con3.com/files/pasorich_briefpaper.jpg">
+
 ---
 
 ## 必要なもの
