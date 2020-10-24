@@ -2,7 +2,7 @@
 
 LF=$(printf '\\\012_')
 LF=${LF%_}
-EXTENSION_NAME=PaSoRich
+EXTENSION_NAME='PaSoRich 0.7.1'
 EXTENSION_ID=pasorich
 COLLABORATOR=con3office
 EXTENSION_DESCRIPTION="Read SmartCard IDm."
@@ -18,7 +18,7 @@ cp ${EXTENSION_ID}/scratch-gui/src/lib/libraries/extensions/${EXTENSION_ID}/${EX
 mv src/lib/libraries/extensions/index.jsx src/lib/libraries/extensions/index.jsx_orig
 DESCRIPTION="\
     {${LF}\
-        name: '${EXTENSION_NAME}',${LF}\
+        name: ${EXTENSION_NAME},${LF}\
         extensionId: '${EXTENSION_ID}',${LF}\
         collaborator: '${COLLABORATOR}',${LF}\
         iconURL: ${EXTENSION_ID}IconURL,${LF}\

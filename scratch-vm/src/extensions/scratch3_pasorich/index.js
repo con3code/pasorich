@@ -28,7 +28,7 @@ let isConnect = formatMessage({
     description: 'push2Connect'
 });
 const intvalTimeShort = 12;
-const PaSoRichVersion = "PaSoRich 0.7.0";
+const PaSoRichVersion = "PaSoRich 0.7.1";
 
 
  /**
@@ -101,8 +101,6 @@ function send(sendDevice, data) {
     if(inoutFlag){return;}
     inoutFlag = true;
 
-    //console.log("snd -> ");
-
     let uint8a = new Uint8Array(data);
 
     return sendDevice.transferOut(2, uint8a)
@@ -118,8 +116,6 @@ function receive(receiveDevice, len, cpy) {
 
     if(inoutFlag){return;}
     inoutFlag = true;    
-
-    //console.log("rcv <- " + len);
 
     let receiveData = receiveDevice.transferIn(1, len);
 
@@ -311,14 +307,6 @@ class Scratch3Pasorich {
          */
         this.runtime = runtime;
 
-        //console.log("initializing...");
-		//console.log("navigator:");
-		//console.log(navigator);
-		//console.log("navigator.usb:");
-		//console.log(navigator.usb);
-		//console.log("pasoriDevice:");
-		//console.log(pasoriDevice);
-
         if (pasoriDevice !== undefined) {
             if(pasoriDevice.opened){
                 pasoriDevice.close();
@@ -444,37 +432,55 @@ class Scratch3Pasorich {
                     }),
                     blockType: BlockType.COMMAND,
                 }
-                /*
-                ,
-                {
-                    opcode: 'getHashedIdm',
-                    text: formatMessage({
-                        id: 'pasorich.getHashedIdm',
-                        default: 'HashedIDm',
-                        description: 'getHashedIdm'
-                    }),
-                    blockType: BlockType.REPORTER
-                }
-                */
             ],
             menus: {
             }
+            /*
+            ,
+            translation_map: {
+                'ja': {
+                    'pasorich.PaSoRich': 'パソリッチ',
+                    'pasorich.push2Connect':'押して接続',
+                    'pasorich.Connect': '接続',
+                    'pasorich.readPasori': 'パソリ読み取り',
+                    'pasorich.getIdm': 'IDm',
+                    'pasorich.getHashedIdm': 'HexIDm',
+                    'pasorich.resetIdm': 'IDmリセット',
+                    'pasorich.getReadingFlag': '読取中',
+                    'pasorich.getWaitingFlag': '待機中',
+                    'pasorich.readingDone': '読み取り完了',
+                    'pasorich.ConnectReading': '読取中...',
+                    'pasorich.push2Connect': 'クリックして接続開始',
+                    'pasorich.ConnectConnected': '接続完了...',
+                    'pasorich.ConnectConnecting': '接続中...',
+                    'pasorich.ConnectSuccess': '接続成功...',
+                    'pasorich.ConnectFailure': '接続失敗...'
+                },
+                'ja-Hira': {
+                    'pasorich.PaSoRich': 'ぱそりっち',
+                    'pasorich.push2Connect':'おしてせつぞく',
+                    'pasorich.Connect': 'せつぞく',
+                    'pasorich.readPasori': 'パソリよみとり',
+                    'pasorich.getIdm': 'IDm',
+                    'pasorich.getHashedIdm': 'HexIDm',
+                    'pasorich.resetIdm': 'IDmリセット',
+                    'pasorich.getReadingFlag': 'よみとりちゅう',
+                    'pasorich.getWaitingFlag': 'たいきちゅう',
+                    'pasorich.readingDone': 'よみとりかんりょう',
+                    'pasorich.ConnectReading': 'よみとりちゅう...',
+                    'pasorich.push2Connect': 'クリックしてせつぞくかいし',
+                    'pasorich.ConnectConnected': 'せつぞくかんりょう...',
+                    'pasorich.ConnectConnecting': 'せつぞくちゅう...',
+                    'pasorich.ConnectSuccess': 'せつぞくせいこう...',
+                    'pasorich.ConnectFailure': 'せつぞくしっぱい...'
+                }
+            }
+            */
         };
     }
 
 
     openPasori () {
-
-        /*
-        if(readingFlag){
-            isConnect = formatMessage({
-                id: 'pasorich.ConnectReading',
-                default: 'Reading...',
-                description: 'ConnectReading'
-            });
-            return isConnect;
-        }
-        */
 
         if (deviceFlag || (pasoriDevice !== undefined && pasoriDevice !== null)) {
             connectingCount = 0;
@@ -552,13 +558,6 @@ class Scratch3Pasorich {
 
         return isConnect;
 
-    }
-
-    
-    //no
-    closePasori () {
-        if(readingFlag){return;}
-        return pasoriDevice.close();
     }
 
 
@@ -667,31 +666,9 @@ class Scratch3Pasorich {
     }
 
 
-    //no
-    readingDone () {
-        return !readingFlag;
-    }
-
-    //no
-    getReadingFlag () {
-        return readingFlag;
-    }
-
-    //no
-	getWaitingFlag () {
-        return !readingFlag;
-    }
-
-    //no
-    getHashedIdm () {
-        //console.log("HashedIDm: " + idmNumSha256);
-        return idmNumSha256;
-    }
-
-
     setupTranslations () {
         const localeSetup = formatMessage.setup();
-        const extTranslations = {
+        const extensionTranslations = {
             'ja': {
                 'pasorich.PaSoRich': 'パソリッチ',
                 'pasorich.push2Connect':'押して接続',
@@ -729,11 +706,12 @@ class Scratch3Pasorich {
                 'pasorich.ConnectFailure': 'せつぞくしっぱい...'
             }
         };
-        for (const locale in extTranslations) {
+
+        for (const locale in extensionTranslations) {
             if (!localeSetup.translations[locale]) {
                 localeSetup.translations[locale] = {};
             }
-            Object.assign(localeSetup.translations[locale], extTranslations[locale]);
+            Object.assign(localeSetup.translations[locale], extensionTranslations[locale]);
         }
     }
 
