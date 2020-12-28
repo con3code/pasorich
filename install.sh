@@ -18,7 +18,7 @@ cp ${EXTENSION_ID}/scratch-gui/src/lib/libraries/extensions/${EXTENSION_ID}/${EX
 mv src/lib/libraries/extensions/index.jsx src/lib/libraries/extensions/index.jsx_orig
 DESCRIPTION="\
     {${LF}\
-        name: ${EXTENSION_NAME},${LF}\
+        name: '${EXTENSION_NAME}',${LF}\
         extensionId: '${EXTENSION_ID}',${LF}\
         collaborator: '${COLLABORATOR}',${LF}\
         iconURL: ${EXTENSION_ID}IconURL,${LF}\
