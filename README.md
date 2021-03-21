@@ -31,6 +31,31 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 
 ---
 
+## How
+
+1. Setup LLK/scratch-gui on your computer.
+
+    ```
+    % git clone git@github.com:LLK/scratch-gui.git
+    % cd scratch-gui
+    % npm install
+    ```
+
+2. In scratch-gui folder, clone pasorich. You will have numberbank folder under scratch-gui.
+
+    ```
+    % git clone https://github.com/con3office/pasorich.git
+    ```
+
+3. Run the install script.
+
+    ```
+    % sh pasorich/install.sh
+    ```
+
+
+---
+
 ## 開発状況
 ### (0.7.0)
 - コードの見直し整理
