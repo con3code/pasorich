@@ -18,7 +18,13 @@ cp ${EXTENSION_ID}/scratch-gui/src/lib/libraries/extensions/${EXTENSION_ID}/${EX
 mv src/lib/libraries/extensions/index.jsx src/lib/libraries/extensions/index.jsx_orig
 DESCRIPTION="\
     {${LF}\
-        name: '${EXTENSION_NAME}',${LF}\
+        name: (${LF}\
+            <FormattedMessage
+                defaultMessage='${EXTENSION_NAME}',${LF}\
+                description='${EXTENSION_NAME}',${LF}\
+                id='gui.extension.${EXTENSION_ID}blocks.name'${LF}\
+            />${LF}\
+        ),${LF}\
         extensionId: '${EXTENSION_ID}',${LF}\
         collaborator: '${COLLABORATOR}',${LF}\
         iconURL: ${EXTENSION_ID}IconURL,${LF}\
@@ -30,6 +36,16 @@ DESCRIPTION="\
                 id='gui.extension.${EXTENSION_ID}blocks.description'${LF}\
             />${LF}\
         ),${LF}\
-        featured: true${LF}\
+        featured: true,${LF}\
+        translationMap: {${LF}\
+            'ja': {${LF}\
+                'gui.extension.${EXTENSION_ID}blocks.name': 'パソリッチ 2.0',${LF}\
+                'gui.extension.${EXTENSION_ID}blocks.description': 'ICカードのIDmを読み取る。'${LF}\
+            },${LF}\
+            'ja-Hira': {${LF}\
+                'gui.extension.${EXTENSION_ID}blocks.name': 'ぱそりっち 2.0',${LF}\
+                'gui.extension.${EXTENSION_ID}blocks.description': 'ICかーどのばんごうをよみとる。'${LF}\
+            }${LF}\
+        }${LF}\
     },"
 sed -e "s|^export default \[$|import ${EXTENSION_ID}IconURL from './${EXTENSION_ID}/${EXTENSION_ID}.png';${LF}import ${EXTENSION_ID}InsetIconURL from './${EXTENSION_ID}/${EXTENSION_ID}-small.png';${LF}${LF}export default [${LF}${DESCRIPTION}|g" src/lib/libraries/extensions/index.jsx_orig > src/lib/libraries/extensions/index.jsx

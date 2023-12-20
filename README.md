@@ -1,5 +1,5 @@
-# PaSoRich - SC2Scratch for PaSoRi to Scratch 3.0
-SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのScratch3.0拡張機能です。
+# PaSoRich 2.0 - SC2Scratch for PaSoRi to Scratch 3.0
+SONY PaSoRi (RC-S380/RC-S300) を使ってFelicaカードのIDmを読み取るためのScratch3.0拡張機能です。
 
 スマートカード（Felicaカード）を使ったプログラム開発が可能になることを目指しています。
 
@@ -8,7 +8,7 @@ SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのS
 ---
 
 ## 必要なもの
-- SONY PaSoRiカードリーダー（[RC-S380](https://www.sony.co.jp/Products/felica/consumer/products/RC-S380.html)のみ対応）
+- SONY PaSoRiカードリーダー（[RC-S380](https://www.sony.co.jp/Products/felica/consumer/products/RC-S380.html)と[RC-S300](https://www.sony.co.jp/Products/felica/consumer/products/RC-S300.html)に対応）
 - Google Chrome，Microsoft Edge 等のWebUSB対応ブラウザ
 
 ## 動作環境
@@ -21,7 +21,7 @@ SONY PaSoRi (RC-S380) を使ってFelicaカードのIDmを読み取るためのS
 　※iOSでは利用できません。
 
 ## デモ用Scratchプロジェクト
-[https://github.com/con3office/pasorich/tree/master/demo-projects](https://github.com/con3office/pasorich/tree/master/demo-projects)
+[https://github.com/con3code/pasorich/tree/master/demo-projects](https://github.com/con3code/pasorich/tree/master/demo-projects)
 
 ## 利用情報
 PaSoRiを始め，ICカードをScratchで利用する関連情報を以下のサイトで公開しています。
@@ -44,7 +44,7 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 2. In scratch-gui folder, clone pasorich. You will have numberbank folder under scratch-gui.
 
     ```
-    % git clone https://github.com/con3office/pasorich.git
+    % git clone https://github.com/con3code/pasorich.git
     ```
 
 3. Run the install script.
@@ -57,6 +57,12 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 ---
 
 ## 開発状況
+### (2.0)
+- RC-S300に対応
+- ICカードリーダーの複数利用に対応
+- 更新確認機能ブロックの追加
+- デバイスリセットブロックの追加
+
 ### (0.7.0)
 - コードの見直し整理
 
@@ -86,14 +92,15 @@ PaSoRiを始め，ICカードをScratchで利用する関連情報を以下の�
 
 
 ## 開発環境
-ローカルScratch3.0環境にて，JavaScript言語を使用して開発。
-macOS Catalina／Visual Studio Code／Google Chrome
+Xcratch（拡張Scratch3.0環境）にて，JavaScript言語を使用して開発。
+macOS／Cursor Editor／Google Chrome
 
 ## ライセンス
-PaSoRich (SC3Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiとともに利用することを踏まえ，それらと同様の三条項BSDライセンス（BSD-3-clause）にもとづき自由に利用することができます。著作者表示はcon3officeとしており，これは開発者kotatsurin（林向達＠徳島文理大学）の仮想事務所の名称です。連絡不要ですが，活用例等の報告は大歓迎です。
+PaSoRiはソニーグループ株式会社またはその関連会社の登録商標または商標です。
+PaSoRich (SC2Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiとともに利用することを踏まえ，それらと同様の三条項BSDライセンス（BSD-3-clause）にもとづき自由に利用することができます。連絡不要ですが，活用例等の報告は大歓迎です。
 
 ## 参考情報
-
+[SONY PaSoRi RC-S300](https://www.sony.co.jp/Products/felica/consumer/products/RC-S300.html)
 [SONY PaSoRi RC-S380](https://www.sony.co.jp/Products/felica/consumer/products/RC-S380.html)
 
 [Scratch 3.0の拡張機能を作ってみよう](https://ja.scratch-wiki.info/wiki/Scratch_3.0の拡張機能を作ってみよう)
@@ -104,7 +111,11 @@ PaSoRich (SC3Scratch for PaSoRi)及び関連情報はscrtach-vm/scratch-guiと�
 
 [How to Develop Your Own Block for Scratch 3.0](https://medium.com/@hiroyuki.osaki/how-to-develop-your-own-block-for-scratch-3-0-1b5892026421)
 
+[「WebUSBでFeliCaのIDmとMIFAREのIDも読み込む」を、RC-S300に対応させたよ](https://qiita.com/MarioninC/items/b5c59e78f3e23c06b83f)
+
+[JavaScript Web APIs USBDevice を使って FeliCa リーダー／ライターを操作してみました。](https://sakura-system.com/?p=2892)
+
 PaSoRich自体はインターネット接続を必要としませんが，クラウドとの連携は拡張機能[NumberBank](https://con3.com/numberbank/)を利用することができます。
 
 ## 開発者
-kotatsurin
+@kotatsurin
