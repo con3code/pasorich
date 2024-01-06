@@ -2,7 +2,7 @@
 
 LF=$(printf '\\\012_')
 LF=${LF%_}
-EXTENSION_NAME='PaSoRich 0.7.1'
+EXTENSION_NAME='PaSoRich 2.0'
 EXTENSION_ID=pasorich
 COLLABORATOR=con3office
 EXTENSION_DESCRIPTION="Read SmartCard IDm."
