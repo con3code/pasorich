@@ -46,8 +46,8 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
-import pasorichImage from './pasorich/pasorich.png';
-import pasorichInsetImage from './pasorich/pasorich-small.png';
+import pasorichImage from './pasorich/pasorich_entry.png';
+import pasorichInsetImage from './pasorich/pasorich_inset.png';
 
 export default [
     {
