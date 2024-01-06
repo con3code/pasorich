@@ -91,27 +91,6 @@ const menuIconURI = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZ
 
 const EXTENSION_ID = 'pasorich';
 
-/**
- * Formatter which is used for translation.
- * This will be replaced which is used in the runtime.
- * @param {object} messageData - format-message object
- * @returns {string} - message for the locale
- */
-let formatMessage = messageData => messageData.defaultMessage;
-
-/**
- * Setup format-message for this extension.
- */
-const setupTranslations = () => {
-    const localeSetup = formatMessage.setup();
-    if (localeSetup && localeSetup.translations[localeSetup.locale]) {
-        Object.assign(
-            localeSetup.translations[localeSetup.locale],
-            translations[localeSetup.locale]
-        );
-    }
-};
-
 
 /**
  * Class for the PaSoRich - PaSoRi with Scratch 3.0
