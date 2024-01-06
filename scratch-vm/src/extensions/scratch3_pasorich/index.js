@@ -2,7 +2,7 @@
     SC2Scratch for PaSoRi (PaSoRich)
     Scratch3.0 Extension to read SmartCard (Felica) by SONY RC-S380 (PaSoRi)
 
-    20231222 - 2.0(2003)
+    20240106 - 2.0(2004)
 
     Web:
     https://con3.com/sc2scratch/
@@ -71,7 +71,7 @@ let nfcDevices = [];
 let deviceOpening = false;
 let seqNumber = 0;
 
-const pasorichVersion = 'PaSoRich 2.0(2003)';
+const pasorichVersion = 'PaSoRich 2.0(2004)';
 
 
 /**
@@ -278,8 +278,8 @@ class Scratch3PasorichBlocks {
         return {
             id: Scratch3PasorichBlocks.EXTENSION_ID,
             name: Scratch3PasorichBlocks.EXTENSION_NAME, // 'PaSoRich',
-            extensionURL: Scratch3PasorichBlocks.extensionURL,
-            blockIconURI: blockIcon,
+            menuIconURI: menuIconURI,
+            blockIconURI: blockIconURI,
             showStatusButton: false,
             color1: '#608DD3',
             color2: '#608DD3',
